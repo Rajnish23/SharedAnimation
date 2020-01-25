@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.rajnish.sharedanimationdemo.ui.detail.DetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.detail.DetailFragment">
+
+        <ImageView
+            android:id="@+id/backdrop_iv"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:loadPoster="@{viewmodel.popularItem.backdropPath}"/>
+
+        <ImageView
+            android:id="@+id/poster_path_iv"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="20dp"
+            android:transitionName="@{@string/posterImage(String.valueOf(viewmodel.popularItem.id))}"
+            app:loadPoster="@{viewmodel.popularItem.posterPath}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backdrop_iv"
+            app:layout_constraintBottom_toBottomOf="@id/backdrop_iv"/>
+
+        <RatingBar
+            android:id="@+id/movie_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            tools:rating="3"
+            android:layout_margin="20dp"
+            android:transitionName="@{@string/rating(String.valueOf(viewmodel.popularItem.id))}"
+            android:rating="@{viewmodel.popularItem.voteAverage}"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            app:layout_constraintTop_toBottomOf="@id/backdrop_iv"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/release_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="29/08/2020"
+            android:layout_margin="20dp"
+            android:transitionName="@{@string/releaseDate(String.valueOf(viewmodel.popularItem.id))}"
+            android:text="@{viewmodel.popularItem.releaseDate}"
+            app:layout_constraintTop_toBottomOf="@id/movie_rating"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/details_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@{viewmodel.popularItem.overview}"
+            app:layout_constraintTop_toBottomOf="@id/poster_path_iv"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

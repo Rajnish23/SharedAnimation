@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="posterImage">poster %s</string>
+    <string name="releaseDate">date %s</string>
+    <string name="rating">rating %s</string>
+</resources>
